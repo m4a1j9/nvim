@@ -43,3 +43,5 @@ vim.g.maplocalleader = "\\"
 
 -- Вызов файла с кофигом пакетного менеджера
 require("config.lazy")
+
+vim.keymap.set('n', 'gcc', '')
