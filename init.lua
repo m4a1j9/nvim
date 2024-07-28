@@ -41,7 +41,6 @@ vim.g.mapleader = " "
 -- ?
 vim.g.maplocalleader = "\\"
 
--- Вызов файла с кофигом пакетного менеджера
+-- Вызов файла с конфигом пакетного менеджера
 require("config.lazy")
-
-vim.keymap.set('n', 'gcc', '')
+require("mappings")
