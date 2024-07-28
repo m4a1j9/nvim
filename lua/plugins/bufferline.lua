@@ -1,7 +1,18 @@
 local close_buffer = function()
-	local tab_number = vim.api.nvim_get_current_tabpage()
-	vim.cmd([[bw]])
-	vim.cmd([[BufferLineGoToBuffer tab_number]])
+	local bufferline = require("bufferline")
+	local buf_number = vim.api.nvim_get_current_buf()
+
+	local is_next_valid = vim.api.nvim_buf_is_valid(buf_number - 1)
+	if is_next_valid then
+		vim.cmd("bd")
+		bufferline.move_to(buf_number - 1)
+	end
+
+	local is_prev_valid = vim.api.nvim_buf_is_valid(buf_number + 1)
+	if is_prev_valid then
+		vim.cmd("bd")
+		bufferline.move_to(buf_number + 1)
+	end
 end
 
 -- Отображение вкладок
