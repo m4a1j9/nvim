@@ -80,8 +80,6 @@ local exts = {
   "javascriptreact",
   "typescriptreact",
   -- using pwa-chrome
-  "vue",
-  "svelte",
 }
 
 for i, ext in ipairs(exts) do

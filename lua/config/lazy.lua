@@ -21,7 +21,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  require("plugins.DAP.main").plugin,
+  -- require("plugins.DAP.main").plugin,
+  require("plugins.DAP.2nd").plugin,
   require("plugins.theme").plugin,
   require("plugins.auto-session").plugin,
   require("plugins.bufferline").plugin,
