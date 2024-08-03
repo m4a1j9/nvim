@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugin = {
 	"folke/which-key.nvim",
 	event = "VeryLazy",
 	opts = {
@@ -22,3 +24,5 @@ return {
 		},
 	},
 }
+
+return M

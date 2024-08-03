@@ -1,5 +1,7 @@
 -- Подсветка синтаксиса и автокомплит при конфигурации .lua плагинов
-return {
+local M = {}
+
+M.plugin = {
   {
     "folke/lazydev.nvim",
     ft = "lua", -- only load on lua files
@@ -24,3 +26,5 @@ return {
   },
   -- { "folke/neodev.nvim", enabled = false }, -- make sure to uninstall or disable neodev.nvim
 }
+
+return M

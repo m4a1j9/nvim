@@ -21,27 +21,22 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  spec = {
-    -- import your plugins
-    { 
-      import = "plugins",
-    },
-    {
-      import = "plugins.lsp",
-    },
-  },
-  {
-    install = {
-      colorscheme = { "tokionight" },
-    },
-    checker = {
-      enabled = true,
-      notify = false,
-    },
-    change_detection = {
-      notify = false,
-    },
-  }
+  require("plugins.DAP.main").plugin,
+  require("plugins.theme").plugin,
+  require("plugins.auto-session").plugin,
+  require("plugins.bufferline").plugin,
+  require("plugins.colorizer").plugin,
+  require("plugins.dashboard").plugin,
+  require("plugins.lazydev").plugin,
+  require("plugins.lualine").plugin,
+  require("plugins.neo-tree").plugin,
+  require("plugins.nmiv-cmp").plugin,
+  require("plugins.none-ls").plugin,
+  require("plugins.telescope").plugin,
+  require("plugins.theme").plugin,
+  require("plugins.treesitter").plugin,
+  require("plugins.which-key").plugin,
+
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   -- install = { colorscheme = { "habamax" } },

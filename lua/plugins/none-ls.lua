@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugin = {
 	{
 		"nvimtools/none-ls.nvim",
 		config = function()
@@ -14,3 +16,6 @@ return {
 		end,
 	},
 }
+
+return M
+

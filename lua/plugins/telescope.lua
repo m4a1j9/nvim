@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugin = {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.8",
@@ -30,3 +32,6 @@ return {
 		end,
 	},
 }
+
+return M
+

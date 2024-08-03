@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugin = {
 	{
 		"rmagatti/auto-session",
 		dependencies = {
@@ -11,3 +13,6 @@ return {
 		end,
 	},
 }
+
+return M
+

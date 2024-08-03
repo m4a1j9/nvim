@@ -1,7 +1,14 @@
-return {
+local M = {}
+
+M.plugin = {
   "folke/tokyonight.nvim",
   priority = 1000, -- make sure to load this before all the other start plugins
   config = function()
+    M.setup()
+  end,
+}
+
+M.setup = function()
     local bg_highlight = "#143652"
     local bg_search = "#0A64AC"
     local bg_visual = "#275378"
@@ -25,6 +32,12 @@ return {
       end,
     })
     -- load the colorscheme here
-    vim.cmd([[colorscheme tokyonight]])
-  end,
-}
+	vim.cmd([[colorscheme tokyonight]])
+  end
+
+
+if not pcall(debug.getlocal, 4, 1) then
+  M.setup()
+end
+
+return M

@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+M.plugin = {
   {
     "NvChad/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
@@ -9,3 +11,6 @@ return {
     }
   },
 }
+
+return M
+
