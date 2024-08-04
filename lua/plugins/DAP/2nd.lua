@@ -89,6 +89,7 @@ M.setup = function()
         webRoot = "${workspaceFolder}/src",
         -- skip files from vite's hmr
         skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+        runtimeExecutable = "/usr/bin/yandex-browser-stable",
       },
       -- only if language is javascript, offer this debug action
       language == "javascript" and {
