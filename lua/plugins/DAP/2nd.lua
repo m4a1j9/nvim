@@ -14,20 +14,19 @@ M.plugin = {
     'theHamsta/nvim-dap-virtual-text',
     'nvim-neotest/nvim-nio',
   },
-  keys = {
-    -- normal mode is default
-    { "<leader>d", function() require 'dap'.toggle_breakpoint() end },
-    { "<leader>c", function() require 'dap'.continue() end },
-    { "<C-'>",     function() require 'dap'.step_over() end },
-    { "<C-;>",     function() require 'dap'.step_into() end },
-    { "<C-:>",     function() require 'dap'.step_out() end },
-  },
   config = function()
     M.setup()
   end
 }
 
 M.setup = function()
+  -- # Sign
+	vim.fn.sign_define("DapBreakpoint", { text = "b", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointCondition", { text = "B", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapLogPoint", { text = "lp", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = "S", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "R", texthl = "", linehl = "", numhl = "" })
+
   require("dap-vscode-js").setup({
     debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
     -- adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
@@ -64,23 +63,26 @@ M.setup = function()
         skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
       },
       {
+        -- yandex-browser-stable --remote-debugging-port=9222
         type = 'pwa-chrome',
         name = 'Attach to Chrome (9222)',
         request = 'attach',
         port = 9222,
-        -- sourceMaps = true,
-        -- protocol = 'inspector',
-        -- resolveSourceMapLocations = {
-        --   "${workspaceFolder}/**",
-        --   "!**/node_modules/**" },
+        url = "http://localhost:3000",
+        webRoot = "${workspaceFolder}/src",
+        sourceMaps = true,
+        protocol = 'inspector',
+        resolveSourceMapLocations = {
+          "${workspaceFolder}/**",
+          "!**/node_modules/**" },
         -- -- path to src in vite based projects (and most other projects as well)
-        -- cwd = "${workspaceFolder}/src",
+        cwd = "${workspaceFolder}/src",
         -- -- we don't want to debug code inside node_modules, so skip it!
-        -- skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+        skipFiles = { "${workspaceFolder}/node_modules/**/*" },
       },
       {
         type = "pwa-chrome",
-        name = "Launch Chrome to debug client",
+        name = "Launch Yandex to debug client",
         request = "launch",
         port = 9222,
         url = "http://localhost:3000",
@@ -107,6 +109,7 @@ M.setup = function()
   end
 
   require("dapui").setup()
+
   local dap, dapui = require("dap"), require("dapui")
   dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open({ reset = true })

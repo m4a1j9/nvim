@@ -5,7 +5,7 @@ M.plugin = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSInstall",
 
-    config = function()
+  config = function()
       M.setup()
     end
   },

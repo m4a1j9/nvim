@@ -1,5 +1,3 @@
--- # DAP
-
 local M = {}
 
 M.plugin = {
@@ -14,8 +12,13 @@ M.plugin = {
 		"nvim-treesitter/nvim-treesitter",
 		"theHamsta/nvim-dap-virtual-text",
 		"mxsdev/nvim-dap-vscode-js",
+    -- {
+    --   "microsoft/vscode-js-debug",
+    --   version = "1.x",
+    --   build = "npm i && npm run compile vsDebugServerBundle && mv dist out"
+    -- },
 	},
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	config = function()
 		M.setup()
 	end,
@@ -37,11 +40,11 @@ M.setup = function()
 	local dap_virtual_text = require("nvim-dap-virtual-text")
 
 	-- # Sign
-	vim.fn.sign_define("DapBreakpoint", { text = "🟥", texthl = "", linehl = "", numhl = "" })
-	vim.fn.sign_define("DapBreakpointCondition", { text = "🟧", texthl = "", linehl = "", numhl = "" })
-	vim.fn.sign_define("DapLogPoint", { text = "🟩", texthl = "", linehl = "", numhl = "" })
-	vim.fn.sign_define("DapStopped", { text = "🈁", texthl = "", linehl = "", numhl = "" })
-	vim.fn.sign_define("DapBreakpointRejected", { text = "⬜", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpoint", { text = "b", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointCondition", { text = "B", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapLogPoint", { text = "lp", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = "S", texthl = "", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = "R", texthl = "", linehl = "", numhl = "" })
 
 	-- # DAP Virtual Text
 	dap_virtual_text.setup({
@@ -116,37 +119,6 @@ M.setup = function()
 	-- dap.listeners.before.event_exited["dapui_config"] = function()
 	--   dapui.close()
 	-- end
-
-	-- # Keymap
-	local opts = {
-		noremap = true,
-		silent = true,
-	}
-
-	vim.keymap.set("n", "<leader>di", dap.toggle_breakpoint, opts)
-	vim.keymap.set("n", "<leader>di", dap.toggle_breakpoint, opts)
-	vim.keymap.set(
-		"n",
-		"<leader>dI",
-		':lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>',
-		opts
-	)
-	vim.keymap.set(
-		"n",
-		"<leader>dp",
-		':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>',
-		opts
-	)
-	vim.keymap.set("n", "<leader>ds", ':lua require("dap").continue()<CR>', opts)
-	vim.keymap.set("n", "<leader>dl", ':lua require("dap").run_to_cursor()<CR>', opts)
-	vim.keymap.set("n", "<leader>dS", ':lua require("dap").disconnect()<CR>', opts)
-	vim.keymap.set("n", "<leader>dn", ':lua require("dap").step_over()<CR>', opts)
-	vim.keymap.set("n", "<leader>dN", ':lua require("dap").step_into()<CR>', opts)
-	vim.keymap.set("n", "<leader>do", ':lua require("dap").step_out()<CR>', opts)
-
-	vim.keymap.set("n", "<leader>dww", ':lua require("dapui").toggle()<CR>', opts)
-	vim.keymap.set("n", "<leader>dw[", ':lua require("dapui").toggle(1)<CR>', opts)
-	vim.keymap.set("n", "<leader>dw]", ':lua require("dapui").toggle(2)<CR>', opts)
 
 	-- # DAP Config
 	require("plugins.DAP.languages.typescript")

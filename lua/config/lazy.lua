@@ -37,6 +37,8 @@ require("lazy").setup({
   require("plugins.theme").plugin,
   require("plugins.treesitter").plugin,
   require("plugins.which-key").plugin,
+  require("plugins.lsp.mason").plugin,
+  require("plugins.lsp.lspconfig").plugin,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
