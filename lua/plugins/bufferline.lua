@@ -21,7 +21,7 @@ M.setup = function()
       },
       -- Отображение статуса ошибок в табах
       diagnostics = "nvim_lsp",
-      separator_style = "slope",
+      separator_style = { "", "" },
     },
   })
 end
