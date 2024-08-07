@@ -39,6 +39,8 @@ require("lazy").setup({
   require("plugins.which-key").plugin,
   require("plugins.lsp.mason").plugin,
   require("plugins.lsp.lspconfig").plugin,
+  require("plugins.git.neogit").plugin,
+  require("plugins.git.gitsigns").plugin,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
