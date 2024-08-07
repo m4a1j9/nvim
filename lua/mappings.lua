@@ -29,7 +29,12 @@ vim.keymap.set(
   "<leader>B",
   function()
     require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-  end
+  end,
+  {
+    noremap = true,
+    silent = true,
+    desc = "Set condition breakpoint",
+  }
 )
 vim.keymap.set(
   "n",
@@ -37,7 +42,11 @@ vim.keymap.set(
   function()
     require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
   end,
-  opts
+  {
+    noremap = true,
+    silent = true,
+    desc = "Set logpoint",
+  }
 )
 -- vim.keymap.set(
 --   "n",
