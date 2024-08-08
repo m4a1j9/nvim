@@ -80,9 +80,12 @@ end
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>")
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "<leader>w", ':bw<CR>')
-vim.keymap.set("n", "1", ':BufferLineGoToBuffer 1<CR>')
-vim.keymap.set("n", "2", ':BufferLineGoToBuffer 2<CR>')
-vim.keymap.set("n", "3", ':BufferLineGoToBuffer 3<CR>')
-vim.keymap.set("n", "4", ':BufferLineGoToBuffer 4<CR>')
-vim.keymap.set("n", "5", ':BufferLineGoToBuffer 5<CR>')
+vim.keymap.set("n", "<leader>1", ':BufferLineGoToBuffer 1<CR>')
+vim.keymap.set("n", "<leader>2", ':BufferLineGoToBuffer 2<CR>')
+vim.keymap.set("n", "<leader>3", ':BufferLineGoToBuffer 3<CR>')
+vim.keymap.set("n", "<leader>4", ':BufferLineGoToBuffer 4<CR>')
+vim.keymap.set("n", "<leader>5", ':BufferLineGoToBuffer 5<CR>')
 
+-- shared keys
+vim.keymap.set('n', ';', ':')
+vim.keymap.set('i', 'jj', '<ESC>')
