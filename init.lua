@@ -36,6 +36,10 @@ vim.opt.ignorecase = true
 -- Минимальная подсветка синтаксиса
 vim.opt.termguicolors = true
 
+-- Настройка для auto-session
+vim.o.sessionoptions="localoptions"
+
+
 -- Клавиша-лидер
 vim.g.mapleader = " "
 -- ?
