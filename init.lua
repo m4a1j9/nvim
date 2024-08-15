@@ -39,6 +39,11 @@ vim.opt.termguicolors = true
 -- Настройка для auto-session
 vim.o.sessionoptions="localoptions"
 
+-- fold
+vim.o.foldlevel = 20
+vim.opt.foldlevelstart = 99
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
 -- Клавиша-лидер
 vim.g.mapleader = " "

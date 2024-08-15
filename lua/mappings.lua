@@ -87,3 +87,5 @@ vim.keymap.set(
   ":let @a = substitute(expand('%:p'), '.*\\/src', 'src', '') .. ':' .. line('.') | call system('xclip -selection clipboard', @a)<CR>",
   { noremap = true, silent = true, desc = "Get relative file path" }
 )
+
+vim.keymap.set('v', '//', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text in current buffer' })
