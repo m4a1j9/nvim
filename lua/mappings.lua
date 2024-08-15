@@ -88,4 +88,5 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Get relative file path" }
 )
 
-vim.keymap.set('v', '//', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text in current buffer' })
+vim.keymap.set('v', '/s', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text in current buffer' })
+vim.keymap.set('v', '/w', 'y/\\<<C-R>"\\><CR>', { desc = 'Search for exact highlighted word' })
