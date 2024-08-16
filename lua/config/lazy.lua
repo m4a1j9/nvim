@@ -43,6 +43,7 @@ require("lazy").setup({
   require("plugins.git.gitsigns").plugin,
   require("plugins.vim-indentwise").plugin,
   require("plugins.flash").plugin,
+  require("plugins.nvim-surround").plugin,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
