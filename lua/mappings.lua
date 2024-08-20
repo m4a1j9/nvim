@@ -90,3 +90,4 @@ vim.keymap.set(
 
 vim.keymap.set('v', '/s', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text in current buffer' })
 vim.keymap.set('v', '/w', 'y/\\<<C-R>"\\><CR>', { desc = 'Search for exact highlighted word' })
+vim.keymap.set('n', '<leader>nh', ':nohlsearch<CR>', { desc = 'Show off search highlight' })
