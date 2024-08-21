@@ -21,8 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-  -- require("plugins.DAP.main").plugin,
-  require("plugins.DAP.2nd").plugin,
+  require("plugins.DAP.DAP").plugin,
   require("plugins.theme").plugin,
   require("plugins.auto-session").plugin,
   require("plugins.bufferline").plugin,
@@ -39,6 +38,7 @@ require("lazy").setup({
   require("plugins.which-key").plugin,
   require("plugins.lsp.mason").plugin,
   require("plugins.lsp.lspconfig").plugin,
+  require("plugins.lsp.file-operations").plugin,
   require("plugins.git.neogit").plugin,
   require("plugins.git.gitsigns").plugin,
   require("plugins.vim-indentwise").plugin,
