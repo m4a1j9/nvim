@@ -88,7 +88,7 @@ opts.desc = "Prev buffer"
 vim.keymap.set("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
 
 opts.desc = "Close buffer"
-vim.keymap.set("n", "<leader>w", ":bw<CR>", opts)
+vim.keymap.set("n", "<leader>wq", ":bw<CR>", opts)
 
 opts.desc = "Go to 1 buffer"
 vim.keymap.set("n", "<leader>1", ":BufferLineGoToBuffer 1<CR>", opts)
@@ -158,3 +158,8 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 
 opts.desc = "Find tags"
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
+
+-- Neogit
+opts.desc = "Open Neogit"
+vim.keymap.set('n', '<leader>no', ':Neogit<CR>', opts)
+
