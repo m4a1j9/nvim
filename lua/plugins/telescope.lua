@@ -11,25 +11,24 @@ M.plugin = {
 		},
 
 		config = function()
-			M.setup()
+			M.setupTelescope()
 		end,
 	},
 	{
 		"nvim-telescope/telescope-ui-select.nvim",
 		config = function()
-			require("telescope").setup({
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
-			})
-			require("telescope").load_extension("ui-select")
+			M.setupUiSelect()
+		end,
+	},
+	{
+		"princejoogie/dir-telescope.nvim",
+		config = function()
+			M.setupDirTelescope()
 		end,
 	},
 }
 
-M.setup = function()
+M.setupTelescope = function()
 	local telescope = require("telescope")
 	local builtin = require("telescope.builtin")
 
@@ -43,6 +42,21 @@ M.setup = function()
 			layout_strategy = "vertical",
 		},
 	})
+end
+
+M.setupUiSelect = function()
+	require("telescope").setup({
+		extensions = {
+			["ui-select"] = {
+				require("telescope.themes").get_dropdown({}),
+			},
+		},
+	})
+	require("telescope").load_extension("ui-select")
+end
+
+M.setupDirTelescope = function()
+	require("dir-telescope").setup()
 end
 
 return M

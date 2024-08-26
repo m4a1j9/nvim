@@ -88,6 +88,14 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "Get relative file path" }
 )
 
+-- Search highlighted
 vim.keymap.set('v', '/s', 'y/<C-R>"<CR>', { desc = 'Search for highlighted text in current buffer' })
 vim.keymap.set('v', '/w', 'y/\\<<C-R>"\\><CR>', { desc = 'Search for exact highlighted word' })
+
+-- Show off search highlight
 vim.keymap.set('n', '<leader>nh', ':nohlsearch<CR>', { desc = 'Show off search highlight' })
+
+-- Telescope in specific dirrectory
+vim.keymap.set("n", "<leader>fd", "<cmd>Telescope dir live_grep<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>pd", "<cmd>Telescope dir find_files<CR>", { noremap = true, silent = true })
+
