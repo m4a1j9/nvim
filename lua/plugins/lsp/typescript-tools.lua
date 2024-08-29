@@ -109,6 +109,13 @@ M.setup = function()
       },
     },
   })
+
+  local api = require("typescript-tools.api")
+  require("typescript-tools").setup({
+    handlers = {
+      ["typescriptTools/organizeImports"] = api.organizeImports
+    },
+  })
 end
 
 
