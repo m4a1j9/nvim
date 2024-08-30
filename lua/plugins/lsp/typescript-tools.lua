@@ -3,120 +3,61 @@ local M = {}
 M.plugin = {
 	"pmizio/typescript-tools.nvim",
 	dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  config = function()
-    M.setup()
-  end,
+	config = function ()
+	 M.setup()
+	end,
 }
 
--- The setup function are also passed to the standart nvim-lspconfig server setup
 M.setup = function()
-  -- import lspconfig plugin
-  local lspconfig = require("lspconfig")
+	local on_attach = function(client, bufnr)
+		local keymap = vim.keymap -- for conciseness
+		local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  -- import cmp-nvim-lsp plugin
-  local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		-- set keybinds
+		opts.desc = "Show LSP references"
+		keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
-  local keymap = vim.keymap -- for conciseness
+		opts.desc = "Show LSP definitions"
+		keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
-  local opts = { noremap = true, silent = true }
-  local on_attach = function(client, bufnr)
-    opts.buffer = bufnr
+		opts.desc = "Show LSP implementations"
+		keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
 
-    -- set keybinds
-    opts.desc = "Show LSP references"
-    keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+		opts.desc = "Show LSP type definitions"
+		keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
-    opts.desc = "Show LSP definitions"
-    keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+		opts.desc = "See available code actions"
+		keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 
-    opts.desc = "Show LSP implementations"
-    keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+		opts.desc = "Smart rename"
+		keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
 
-    opts.desc = "Show LSP type definitions"
-    keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+		opts.desc = "Show buffer diagnostics"
+		keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
-    opts.desc = "See available code actions"
-    keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+		opts.desc = "Show line diagnostics"
+		keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
-    opts.desc = "Smart rename"
-    keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+		opts.desc = "Go to previous diagnostic"
+		keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
 
-    opts.desc = "Show buffer diagnostics"
-    keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+		opts.desc = "Go to next diagnostic"
+		keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
 
-    opts.desc = "Show line diagnostics"
-    keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
+		opts.desc = "Show documentation for what is under cursor"
+		keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 
-    opts.desc = "Go to previous diagnostic"
-    keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+		opts.desc = "Restart LSP"
+		keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+	end
 
-    opts.desc = "Go to next diagnostic"
-    keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-    opts.desc = "Show documentation for what is under cursor"
-    keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-    opts.desc = "Restart LSP"
-    keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-  end
-
-  -- used to enable autocompletion (assign to every lsp server config)
-  local capabilities = cmp_nvim_lsp.default_capabilities()
-
-  -- Change the Diagnostic symbols in the sign column (gutter)
-  -- (not in youtube nvim video)
-  local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-  end
-
-  -- configure html server
-  lspconfig["html"].setup({
-    capabilities = capabilities,
+	local api = require("typescript-tools.api")
+	require("typescript-tools").setup({
     on_attach = on_attach,
-  })
-
-  -- configure typescript server with plugin
-  lspconfig["tsserver"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
-
-  -- configure css server
-  lspconfig["cssls"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-  })
-
-  -- configure lua server (with special settings)
-  lspconfig["lua_ls"].setup({
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = { -- custom settings for lua
-      Lua = {
-        -- make the language server recognize "vim" global
-        diagnostics = {
-          globals = { "vim" },
-        },
-        workspace = {
-          -- make language server aware of runtime files
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.stdpath("config") .. "/lua"] = true,
-          },
-        },
-      },
-    },
-  })
-
-  local api = require("typescript-tools.api")
-  require("typescript-tools").setup({
-    handlers = {
-      ["typescriptTools/organizeImports"] = api.organizeImports
-    },
-  })
+		handlers = {
+			["typescriptTools/organizeImports"] = api.organizeImports,
+		},
+	})
 end
-
 
 return M

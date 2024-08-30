@@ -40,6 +40,7 @@ require("lazy").setup({
   require("plugins.lsp.lspconfig").plugin,
   require("plugins.lsp.file-operations").plugin,
   require("plugins.lsp.typescript-tools").plugin,
+  require("plugins.lsp.tsc").plugin,
   require("plugins.git.neogit").plugin,
   require("plugins.git.gitsigns").plugin,
   require("plugins.vim-indentwise").plugin,
