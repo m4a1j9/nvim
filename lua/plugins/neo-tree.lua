@@ -28,6 +28,9 @@ M.setup = function()
 				},
 				hide_dotfiles = false,
 				hide_gitignored = false,
+				hide_by_name = {
+					"node_modules",
+				},
 			},
 		},
 		default_component_configs = {

@@ -33,7 +33,6 @@ require("lazy").setup({
   require("plugins.nmiv-cmp").plugin,
   require("plugins.none-ls").plugin,
   require("plugins.telescope").plugin,
-  require("plugins.theme").plugin,
   require("plugins.treesitter").plugin,
   require("plugins.which-key").plugin,
   require("plugins.lsp.mason").plugin,
