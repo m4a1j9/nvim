@@ -179,4 +179,8 @@ vim.keymap.set("n", "<leader>fo", builtin.oldfiles, opts)
 opts.desc = "Open Neogit"
 vim.keymap.set("n", "<leader>no", ":Neogit<CR>", opts)
 
+-- Flash --
+-- Enter is now set for Flash search, but we still need for common Enter key for select something
+vim.keymap.set("n", "<A-CR>", "<CR>")
+
 --===== plugins end =====--
