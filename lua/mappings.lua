@@ -53,7 +53,7 @@ vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", opts)
 
 -- mass replace shortcut
 
-opts.desc = vim.keymap.set("v", "/rr", 'y:%s/<C-R>"//g<Left><Left>', { noremap = true, desc = "Mass replace" })
+vim.keymap.set("v", "/rr", 'y:%s/<C-R>"//g<Left><Left>', { noremap = true, desc = "Mass replace" })
 vim.keymap.set("v", "/rc", 'y:%s/<C-R>"//gc<Left><Left><Left>', { noremap = true, desc = "Mass replace with asking" })
 vim.keymap.set(
 	"v",
@@ -180,7 +180,85 @@ opts.desc = "Open Neogit"
 vim.keymap.set("n", "<leader>no", ":Neogit<CR>", opts)
 
 -- Flash --
+
 -- Enter is now set for Flash search, but we still need for common Enter key for select something
 vim.keymap.set("n", "<A-CR>", "<CR>")
+
+-- Gitsigns --
+
+local gitsigns = require("gitsigns")
+
+opts.desc = ""
+vim.keymap.set("n", "]c", function()
+	if vim.wo.diff then
+		vim.cmd.normal({ "]c", bang = true })
+	else
+		gitsigns.nav_hunk("next")
+	end
+end)
+
+opts.desc = ""
+vim.keymap.set("n", "[c", function()
+	if vim.wo.diff then
+		vim.cmd.normal({ "[c", bang = true })
+	else
+		gitsigns.nav_hunk("prev")
+	end
+end)
+
+opts.desc = "Stage hunk"
+vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, opts)
+
+opts.desc = "Reset hunk"
+vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, opts)
+
+opts.desc = "Stage hunk v"
+vim.keymap.set("v", "<leader>hs", function()
+	gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end, opts)
+
+opts.desc = "Reset hunk v"
+vim.keymap.set("v", "<leader>hr", function()
+	gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+end, opts)
+
+opts.desc = "Stage buffer"
+vim.keymap.set("n", "<leader>hS", gitsigns.stage_buffer, opts)
+
+opts.desc = "Undo stage hunk"
+vim.keymap.set("n", "<leader>hu", gitsigns.undo_stage_hunk, opts)
+
+opts.desc = "Reset buffer"
+vim.keymap.set("n", "<leader>hR", gitsigns.reset_buffer, opts)
+
+opts.desc = "Preview hunk"
+vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, opts)
+
+opts.desc = "Blame line"
+vim.keymap.set("n", "<leader>hb", function()
+	gitsigns.blame_line({ full = true })
+end, opts)
+
+opts.desc = "Toggle current line blame"
+vim.keymap.set("n", "<leader>tb", gitsigns.toggle_current_line_blame, opts)
+
+opts.desc = "Diffthis"
+vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, opts)
+
+opts.desc = "Diffthis ~"
+vim.keymap.set("n", "<leader>hD", function()
+	gitsigns.diffthis("~")
+end, opts)
+
+opts.desc = "toggle deleted"
+vim.keymap.set("n", "<leader>td", gitsigns.toggle_deleted, opts)
+
+opts.desc = "select hunk"
+vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
+
+-- None-ls
+
+opts.desc = "Format current buffer"
+vim.keymap.set("n", "<Leader>gf", vim.lsp.buf.format, opts)
 
 --===== plugins end =====--

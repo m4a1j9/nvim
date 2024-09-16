@@ -11,11 +11,8 @@ M.plugin = {
 					null_ls.builtins.formatting.prettierd,
 				},
 			})
-
-			vim.keymap.set("n", "<Leader>gf", vim.lsp.buf.format, {})
 		end,
 	},
 }
 
 return M
-
