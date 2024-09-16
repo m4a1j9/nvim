@@ -165,6 +165,9 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files, opts)
 opts.desc = "Search"
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 
+opts.desc = "Search exact word"
+vim.keymap.set("n", "<leader>fc", "<cmd>Telescope live_grep<CR>\\<\\><Left><Left>", opts)
+
 opts.desc = "Find buffer"
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
 
@@ -188,7 +191,7 @@ vim.keymap.set("n", "<A-CR>", "<CR>")
 
 local gitsigns = require("gitsigns")
 
-opts.desc = ""
+opts.desc = "Next hunk"
 vim.keymap.set("n", "]c", function()
 	if vim.wo.diff then
 		vim.cmd.normal({ "]c", bang = true })
@@ -197,7 +200,7 @@ vim.keymap.set("n", "]c", function()
 	end
 end)
 
-opts.desc = ""
+opts.desc = "Prev hunk"
 vim.keymap.set("n", "[c", function()
 	if vim.wo.diff then
 		vim.cmd.normal({ "[c", bang = true })
@@ -255,10 +258,5 @@ vim.keymap.set("n", "<leader>td", gitsigns.toggle_deleted, opts)
 
 opts.desc = "select hunk"
 vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", opts)
-
--- None-ls
-
-opts.desc = "Format current buffer"
-vim.keymap.set("n", "<Leader>gf", vim.lsp.buf.format, opts)
 
 --===== plugins end =====--
