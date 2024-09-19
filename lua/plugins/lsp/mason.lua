@@ -34,6 +34,8 @@ M.setup = function()
 			"tsserver",
 			"html",
 			"cssls",
+			"css_variables",
+			"cssmodules_ls",
 			"lua_ls",
 		},
 		-- auto-install configured servers (with lspconfig)
