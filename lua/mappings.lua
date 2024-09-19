@@ -30,6 +30,7 @@ vim.keymap.set("n", "<A-l>", ":wincmd l<CR>", opts)
 
 vim.keymap.set("n", ";", ":")
 vim.keymap.set("i", "jj", "<ESC>")
+
 opts.desc = "Get relative file path"
 vim.keymap.set(
 	"n",
@@ -37,6 +38,30 @@ vim.keymap.set(
 	":let @a = substitute(expand('%:p'), '.*\\/src', 'src', '') .. ':' .. line('.') | call system('xclip -selection clipboard', @a)<CR>",
 	opts
 )
+
+opts.desc = "Edit macro"
+vim.keymap.set("n", "<leader>em", function()
+	local register = vim.fn.input("Input the register to edit: ")
+	if register == "" then
+		return
+	end
+  -- open a new buffer
+	vim.cmd("new")
+  -- put a entered register
+	vim.cmd("put " .. register)
+  -- sen a simple action after that
+	vim.api.nvim_feedkeys("A", "n", false)
+end, opts)
+
+opts.desc = "Save macro"
+vim.keymap.set('n', '<leader>sm', function ()
+	local register = vim.fn.input("Input the register to save: ")
+	if register == "" then
+		return
+	end
+  vim.api.nvim_feedkeys('"' .. register .. 'yy', 'n', false)
+  vim.cmd('bd!')
+end, opts)
 
 -- Search highlighted --
 
