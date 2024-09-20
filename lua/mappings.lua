@@ -45,22 +45,22 @@ vim.keymap.set("n", "<leader>em", function()
 	if register == "" then
 		return
 	end
-  -- open a new buffer
+	-- open a new buffer
 	vim.cmd("new")
-  -- put a entered register
+	-- put a entered register
 	vim.cmd("put " .. register)
-  -- sen a simple action after that
+	-- sen a simple action after that
 	vim.api.nvim_feedkeys("A", "n", false)
 end, opts)
 
 opts.desc = "Save macro"
-vim.keymap.set('n', '<leader>sm', function ()
+vim.keymap.set("n", "<leader>sm", function()
 	local register = vim.fn.input("Input the register to save: ")
 	if register == "" then
 		return
 	end
-  vim.api.nvim_feedkeys('"' .. register .. 'yy', 'n', false)
-  vim.cmd('bd!')
+	vim.api.nvim_feedkeys('"' .. register .. "yy", "n", false)
+	vim.cmd("bd!")
 end, opts)
 
 -- Search highlighted --
@@ -191,7 +191,7 @@ opts.desc = "Search"
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, opts)
 
 opts.desc = "Search exact word"
-vim.keymap.set("n", "<leader>fc", "<cmd>Telescope live_grep<CR>\\<\\><Left><Left>", opts)
+vim.keymap.set("n", "<leader>fw", 'yiw:Telescope live_grep<CR>\\<<C-R>"\\><Left><Left>', opts)
 
 opts.desc = "Find buffer"
 vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
@@ -201,6 +201,9 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, opts)
 
 opts.desc = "Recent files"
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles, opts)
+
+opts.desc = "Global search highlighted"
+vim.keymap.set("v", "/fh", ':Telescope live_grep<CR><C-R>"')
 
 -- Neogit --
 
