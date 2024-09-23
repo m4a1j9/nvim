@@ -34,6 +34,7 @@ M.setup = function()
       "markdown",
       "markdown_inline",
       "prisma",
+      "jsdoc",
     },
 
     incremental_selection = {
