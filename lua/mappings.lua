@@ -71,8 +71,6 @@ vim.keymap.set("v", "/s", 'y/<C-R>"<CR>', opts)
 opts.desc = "Search for exact highlighted word"
 vim.keymap.set("v", "/w", 'y/\\<<C-R>"\\><CR>', opts)
 
--- Show off search highlight
-
 opts.desc = "Show off search highlight"
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", opts)
 
@@ -203,7 +201,7 @@ opts.desc = "Recent files"
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles, opts)
 
 opts.desc = "Global search highlighted"
-vim.keymap.set("v", "/fh", ':Telescope live_grep<CR><C-R>"')
+vim.keymap.set("v", "/fh", 'y:Telescope live_grep<CR><C-R>"', opts)
 
 -- Neogit --
 
