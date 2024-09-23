@@ -113,12 +113,12 @@ opts.desc = "DAP step out"
 vim.keymap.set("n", "<F11>", require("dap").step_out, opts)
 
 opts.desc = "DAP toggle breakpoint"
-vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint)
+vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint, opts)
 
 opts.desc = "DAP set condition breakpoint"
 vim.keymap.set("n", "<leader>B", function()
 	require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
-end)
+end, opts)
 
 opts.desc = "DAP set logpoint"
 vim.keymap.set("n", "<leader>lm", function()
