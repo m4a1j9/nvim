@@ -44,14 +44,19 @@ M.setup = function()
 		on_attach = on_attach,
 	})
 
-  -- syntax highlighting and support for CSS variables
+	-- syntax highlighting and support for CSS variables
 	lspconfig["css_variables"].setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})
 
-  -- same for css.modules
+	-- same for css.modules
 	lspconfig["cssmodules_ls"].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
+
+	lspconfig["clangd"].setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 	})
