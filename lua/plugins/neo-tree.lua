@@ -39,19 +39,6 @@ M.setup = function()
 			},
 		},
 	})
-	-- Открыть-закрыть файловый менеджер
-	vim.keymap.set(
-		"n",
-		"<A-1>",
-		":Neotree filesystem reveal left<CR>",
-		{ noremap = true, silent = true, desc = "Neotree reveal" }
-	)
-	vim.keymap.set(
-		"n",
-		"<A-1>1",
-		":Neotree filesystem toggle left<CR>",
-		{ noremap = true, silent = true, desc = "Neotree toggle" }
-	)
 end
 
 if not pcall(debug.getlocal, 4, 1) then
