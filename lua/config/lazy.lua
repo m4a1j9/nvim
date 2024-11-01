@@ -43,6 +43,7 @@ require("lazy").setup({
   require("plugins.git.neogit").plugin,
   require("plugins.git.gitsigns").plugin,
   require("plugins.vim-indentwise").plugin,
+  require("plugins.vim-visual-multi").plugin,
   require("plugins.flash").plugin,
   require("plugins.nvim-surround").plugin,
 
