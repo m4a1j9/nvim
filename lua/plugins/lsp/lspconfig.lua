@@ -81,6 +81,11 @@ M.setup = function()
 			},
 		},
 	})
+
+	lspconfig["eslint"].setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+	})
 end
 
 return M
