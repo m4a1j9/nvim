@@ -1,13 +1,14 @@
--- Delete unused keymaps --
+local goLeft = require("plugins.utils.go-left").goLeft
 
+-- Delete unused keymaps --
 -- Toggle comment
 vim.keymap.del("n", "gcc")
 
 -- Set new maps --
 
 local opts = {
-	noremap = true,
-	silent = true,
+  noremap = true,
+  silent = true,
 }
 
 --===== native =====--
@@ -33,43 +34,40 @@ vim.keymap.set("i", "jj", "<ESC>")
 
 opts.desc = "Get relative file path"
 vim.keymap.set(
-	"n",
-	"cp",
-	":let @a = substitute(expand('%:p'), '.*\\/src', 'src', '') .. ':' .. line('.') | call system('xclip -selection clipboard', @a)<CR>",
-	opts
+  "n",
+  "cp",
+  ":let @a = substitute(expand('%:p'), '.*\\/src', 'src', '') .. ':' .. line('.') | call system('xclip -selection clipboard', @a)<CR>",
+  opts
 )
 
 opts.desc = "Edit macro"
 vim.keymap.set("n", "<leader>em", function()
-	local register = vim.fn.input("Input the register to edit: ")
-	if register == "" then
-		return
-	end
-	-- open a new buffer
-	vim.cmd("new")
-	-- put a entered register
-	vim.cmd("put " .. register)
-	-- sen a simple action after that
-	vim.api.nvim_feedkeys("A", "n", false)
+  local register = vim.fn.input("Input the register to edit: ")
+  if register == "" then
+    return
+  end
+  -- open a new buffer
+  vim.cmd("new")
+  -- put a entered register
+  vim.cmd("put " .. register)
+  -- sen a simple action after that
+  vim.api.nvim_feedkeys("A", "n", false)
 end, opts)
 
 opts.desc = "Save macro"
 vim.keymap.set("n", "<leader>sm", function()
-	local register = vim.fn.input("Input the register to save: ")
-	if register == "" then
-		return
-	end
-	vim.api.nvim_feedkeys('"' .. register .. "yy", "n", false)
-	vim.cmd("bd!")
+  local register = vim.fn.input("Input the register to save: ")
+  if register == "" then
+    return
+  end
+  vim.api.nvim_feedkeys('"' .. register .. "yy", "n", false)
+  vim.cmd("bd!")
 end, opts)
 
 -- Search highlighted --
 
 opts.desc = "Search for highlighted text in current buffer"
 vim.keymap.set("v", "/s", 'y/<C-R>"<CR>', opts)
-
-opts.desc = "Search for exact highlighted word"
-vim.keymap.set("v", "/w", 'y/\\<<C-R>"\\><CR>', opts)
 
 opts.desc = "Show off search highlight"
 vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", opts)
@@ -79,20 +77,23 @@ vim.keymap.set("n", "<leader>nh", ":nohlsearch<CR>", opts)
 vim.keymap.set("v", "/rr", 'y:%s/<C-R>"//g<Left><Left>', { noremap = true, desc = "Mass replace" })
 vim.keymap.set("v", "/rc", 'y:%s/<C-R>"//gc<Left><Left><Left>', { noremap = true, desc = "Mass replace with asking" })
 vim.keymap.set(
-	"v",
-	"/ri",
-	'y:%s/<C-R>"//gi<Left><Left><Left>',
-	{ noremap = true, desc = "Mass replace with case sentetive" }
+  "v",
+  "/ri",
+  'y:%s/<C-R>"//gi<Left><Left><Left>',
+  { noremap = true, desc = "Mass replace with case sentetive" }
 )
 vim.keymap.set(
-	"v",
-	"/ra",
-	'y:%s/<C-R>"//gci<Left><Left><Left><Left>',
-	{ noremap = true, desc = "Mass replace with case and asking" }
+  "v",
+  "/ra",
+  'y:%s/<C-R>"//gci<Left><Left><Left><Left>',
+  { noremap = true, desc = "Mass replace with case and asking" }
 )
 -- g => global search
 -- c => Ask for confirmation first
 -- i => Case insensitive
+
+opts.desc = "Exit terminal mode"
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", opts)
 
 --===== native end =====--
 
@@ -117,12 +118,12 @@ vim.keymap.set("n", "<leader>b", require("dap").toggle_breakpoint, opts)
 
 opts.desc = "DAP set condition breakpoint"
 vim.keymap.set("n", "<leader>B", function()
-	require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
+  require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 end, opts)
 
 opts.desc = "DAP set logpoint"
 vim.keymap.set("n", "<leader>lm", function()
-	require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+  require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
 end)
 -- vim.keymap.set(
 --   "n",
@@ -139,8 +140,8 @@ vim.keymap.set("n", "<leader>ui", require("dapui").toggle)
 -- Bufferline --
 
 local close_buffer = function()
-	vim.cmd("bd")
-	vim.cmd("bprevious")
+  vim.cmd("bd")
+  vim.cmd("bprevious")
 end
 
 opts.desc = "Next buffer"
@@ -201,7 +202,14 @@ opts.desc = "Recent files"
 vim.keymap.set("n", "<leader>fo", builtin.oldfiles, opts)
 
 opts.desc = "Global search highlighted"
-vim.keymap.set("v", "/fh", 'y:Telescope live_grep<CR><C-R>"', opts)
+vim.keymap.set("v", "/fs", 'y:Telescope live_grep<CR><C-R>"', opts)
+
+vim.keymap.set(
+  "n",
+  "<leader>wr",
+  ':cfdo %s/<C-R>"//g | update | bd' .. goLeft(16),
+  { noremap = true, desc = "Project-wide replace. Use only in quick-fix list" }
+)
 
 -- Neogit --
 
@@ -219,20 +227,20 @@ local gitsigns = require("gitsigns")
 
 opts.desc = "Next hunk"
 vim.keymap.set("n", "]c", function()
-	if vim.wo.diff then
-		vim.cmd.normal({ "]c", bang = true })
-	else
-		gitsigns.nav_hunk("next")
-	end
+  if vim.wo.diff then
+    vim.cmd.normal({ "]c", bang = true })
+  else
+    gitsigns.nav_hunk("next")
+  end
 end)
 
 opts.desc = "Prev hunk"
 vim.keymap.set("n", "[c", function()
-	if vim.wo.diff then
-		vim.cmd.normal({ "[c", bang = true })
-	else
-		gitsigns.nav_hunk("prev")
-	end
+  if vim.wo.diff then
+    vim.cmd.normal({ "[c", bang = true })
+  else
+    gitsigns.nav_hunk("prev")
+  end
 end)
 
 opts.desc = "Stage hunk"
@@ -243,12 +251,12 @@ vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, opts)
 
 opts.desc = "Stage hunk v"
 vim.keymap.set("v", "<leader>hs", function()
-	gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+  gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 end, opts)
 
 opts.desc = "Reset hunk v"
 vim.keymap.set("v", "<leader>hr", function()
-	gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+  gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 end, opts)
 
 opts.desc = "Stage buffer"
@@ -265,7 +273,7 @@ vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, opts)
 
 opts.desc = "Blame line"
 vim.keymap.set("n", "<leader>hb", function()
-	gitsigns.blame_line({ full = true })
+  gitsigns.blame_line({ full = true })
 end, opts)
 
 opts.desc = "Toggle current line blame"
@@ -276,7 +284,7 @@ vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, opts)
 
 opts.desc = "Diffthis ~"
 vim.keymap.set("n", "<leader>hD", function()
-	gitsigns.diffthis("~")
+  gitsigns.diffthis("~")
 end, opts)
 
 opts.desc = "toggle deleted"
