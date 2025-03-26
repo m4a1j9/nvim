@@ -47,6 +47,7 @@ require("lazy").setup({
   require("plugins.flash").plugin,
   require("plugins.nvim-surround").plugin,
   require("plugins.avante").plugin,
+  require("plugins.nvim-spectre").plugin,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
