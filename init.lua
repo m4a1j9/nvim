@@ -50,6 +50,10 @@ vim.g.mapleader = " "
 -- ?
 vim.g.maplocalleader = "\\"
 
+-- recommendet for Avante
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+
 -- Вызов файла с конфигом пакетного менеджера
 require("config.lazy")
 require("mappings")

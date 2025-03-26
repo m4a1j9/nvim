@@ -3,7 +3,7 @@ local M = {}
 
 M.plugin = {
 	"akinsho/bufferline.nvim",
-	version = "*",
+	version = false,
 	dependencies = "nvim-tree/nvim-web-devicons",
 
 	config = function()

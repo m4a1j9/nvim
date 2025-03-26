@@ -46,6 +46,7 @@ require("lazy").setup({
   require("plugins.vim-visual-multi").plugin,
   require("plugins.flash").plugin,
   require("plugins.nvim-surround").plugin,
+  require("plugins.avante").plugin,
 
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
