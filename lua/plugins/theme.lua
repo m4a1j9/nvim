@@ -17,6 +17,9 @@ M.setup = function()
 	local fg_gutter = "#627E97"
 	local border = "#547998"
 
+	local diff_add_bg = "#135b24"
+	local diff_delete_bg = "#7e2323"
+
 	require("tokyonight").setup({
 		transparent = true,
 		styles = {
@@ -35,8 +38,18 @@ M.setup = function()
 			colors.fg_gutter = fg_gutter
 			colors.fg_sidebar = fg_dark
 		end,
+		on_highlights = function(hl, colors)
+			hl.DiffAdd = {
+				bg = diff_add_bg,
+			}
+			hl.DiffDelete = {
+				bg = diff_delete_bg,
+			}
+			hl.DiffChange = {
+				bg = diff_add_bg,
+			}
+		end,
 	})
-	-- load the colorscheme here
 	vim.cmd([[colorscheme tokyonight]])
 end
 
