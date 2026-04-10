@@ -29,7 +29,7 @@ require("lazy").setup({
   require("plugins.dashboard").plugin,
   require("plugins.lazydev").plugin,
   require("plugins.lualine").plugin,
-  require("plugins.neo-tree").plugin,
+  require("plugins.neo-tree.neo-tree").plugin,
   require("plugins.nmiv-cmp").plugin,
   require("plugins.none-ls").plugin,
   require("plugins.telescope").plugin,

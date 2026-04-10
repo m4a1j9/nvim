@@ -1,0 +1,60 @@
+local copy_path_to_system_clipboard = require("plugins.neo-tree.utils.copy_path_to_system_clipboard")
+local paste_from_system_clipboard = require("plugins.neo-tree.utils.paste_from_system_clipboard")
+local M = {}
+
+M.plugin = {
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "v3.x",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    "MunifTanjim/nui.nvim",
+    -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+  },
+  config = function()
+    M.setup()
+  end,
+}
+
+M.setup = function()
+  require("neo-tree").setup({
+    window = {
+      width = 35,
+    },
+    filesystem = {
+      commands = {
+        copy_path_to_system_clipboard = copy_path_to_system_clipboard,
+        paste_from_system_clipboard = paste_from_system_clipboard,
+      },
+      window = {
+        mappings = {
+          ["<leader>y"] = "copy_path_to_system_clipboard",
+          ["<leader>p"] = "paste_from_system_clipboard",
+        },
+      },
+      filtered_items = {
+        never_show_by_pattern = {
+          ".git",
+          ".idea",
+          ".vscode",
+        },
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_by_name = {
+          "node_modules",
+        },
+      },
+    },
+    default_component_configs = {
+      indent = {
+        indent_size = 1,
+      },
+    },
+  })
+end
+
+if not pcall(debug.getlocal, 4, 1) then
+  M.setup()
+end
+
+return M
