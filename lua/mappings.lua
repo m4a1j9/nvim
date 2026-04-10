@@ -211,6 +211,9 @@ vim.keymap.set(
   { noremap = true, desc = "Project-wide replace. Use only in quick-fix list" }
 )
 
+opts.desc = "Open files git history"
+vim.keymap.set("n", "<leader>fh", '<cmd>Telescope git_file_history<CR>', opts)
+
 -- Neogit --
 
 opts.desc = "Open Neogit"
