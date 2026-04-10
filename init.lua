@@ -39,6 +39,22 @@ vim.opt.termguicolors = true
 -- Настройка для auto-session
 vim.o.sessionoptions="localoptions"
 
+-- Сохранять folds во view
+vim.opt.viewoptions:append("folds")
+local folds_view = vim.api.nvim_create_augroup("FoldsView", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWinLeave", {
+  group = folds_view,
+  pattern = "*",
+  command = "silent! mkview",
+})
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = folds_view,
+  pattern = "*",
+  command = "silent! loadview",
+})
+
 -- fold
 vim.o.foldlevel = 20
 vim.opt.foldlevelstart = 99
